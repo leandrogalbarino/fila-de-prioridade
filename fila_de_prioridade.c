@@ -20,7 +20,6 @@
 // 3 - IMPRIMIR HEAP
 // 4 - sair
 
-void fila_imprimir();
 //Ao imprimir o heap, certifiquem-se de mostrar quem é o pai e quem são seus filhos. 
 // Exemplo: após inserir os valores 1, 2 e 3 num heap de máximo, a impressão deve mostrar:
 // Nó 3: filho esq: 1, filho dir: 2
@@ -29,3 +28,36 @@ void fila_imprimir();
 // Ao remover a primeira vez um elemento do heap (neste caso, o 3 será removido), o heap ficaria:
 // Nó 2: filho esq: 1, filho dir: vazio
 // Nó 1: filho esq: vazio, filho dir: vazio
+
+#include <stdlib.h>
+#include <stdio.h>
+
+#define MAX 100
+
+struct cliente{
+    int no;
+    int prioridade;
+};
+typedef struct cliente Cliente;
+
+struct filaprioridade{
+    int qtd;
+    struct cliente dados[MAX];
+};
+typedef struct filaprioridade FilaPrioridade;
+
+FilaPrioridade* fila_cria(){
+
+}
+
+void fila_libera(FilaPrioridade* f){
+
+}
+
+void fila_imprimir(){
+
+}
+
+int main(){
+
+}
