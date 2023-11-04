@@ -34,30 +34,56 @@
 
 #define MAX 100
 
-struct cliente{
+struct cliente {
     int no;
     int prioridade;
 };
 typedef struct cliente Cliente;
 
-struct filaprioridade{
+struct filaprioridade {
     int qtd;
-    struct cliente dados[MAX];
+    Cliente dados[MAX];
 };
 typedef struct filaprioridade FilaPrioridade;
 
-FilaPrioridade* fila_cria(){
+FilaPrioridade* fila_cria() {
 
 }
 
-void fila_libera(FilaPrioridade* f){
+void fila_libera(FilaPrioridade* f) {
 
 }
 
-void fila_imprimir(){
+void fila_imprimir(FilaPrioridade* f) {
 
 }
 
-int main(){
+int main() {
+    //FilaPrioridade* fila = fila_cria();
+    int opcao;
 
+    do {
+        printf("\tMENU:\n");
+        printf("1 - Inserir\n2 - Remover\n3 - Imprimir\n0 - Sair\n");
+        scanf("%d", &opcao);
+        switch(opcao) {
+            case 1:
+                //inserir
+                break;
+            case 2:
+                //remover
+                break;
+            case 3:
+                //imprimir
+                break;
+            case 0:
+                //liberar
+                break;
+            default:
+                printf("Opcao invalida.\n");
+                break;
+        }
+    } while (opcao != 0);
+
+    return 0;
 }
