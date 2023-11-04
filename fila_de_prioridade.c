@@ -77,7 +77,7 @@ int main() {
             case 3:
                 //imprimir
                 break;
-            case 0:
+            case 4:
                 //liberar
                 break;
             default:
