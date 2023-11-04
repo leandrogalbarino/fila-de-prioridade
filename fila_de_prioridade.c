@@ -34,32 +34,33 @@
 
 #define MAX 100
 
-struct cliente {
-    int no;
+struct no {
+    int v;
     int prioridade;
+    struct no* esquerda;
+    struct no* direita;
 };
-typedef struct cliente Cliente;
+typedef struct no No;
 
-struct filaprioridade {
-    int qtd;
-    Cliente dados[MAX];
+struct heap {
+    No* arvore;
 };
-typedef struct filaprioridade FilaPrioridade;
+typedef struct heap Heap;
 
-FilaPrioridade* fila_cria() {
+Heap* fila_cria() {
 
 }
 
-void fila_libera(FilaPrioridade* f) {
+void fila_libera(Heap* f) {
 
 }
 
-void fila_imprimir(FilaPrioridade* f) {
+void fila_imprimir(Heap* f) {
 
 }
 
 int main() {
-    //FilaPrioridade* fila = fila_cria();
+    //Heap* fila = fila_cria();
     int opcao;
 
     do {
