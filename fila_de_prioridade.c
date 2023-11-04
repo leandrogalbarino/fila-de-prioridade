@@ -34,16 +34,16 @@
 
 #define MAX 100
 
-struct no {
-    int v;
+struct celula {
+    int dado;
     int prioridade;
-    struct no* esquerda;
-    struct no* direita;
+    struct no *esquerda;
+    struct no *direita;
 };
-typedef struct no No;
+typedef struct celula Celula;
 
 struct heap {
-    No* arvore;
+    Celula* arvore;
 };
 typedef struct heap Heap;
 
