@@ -37,8 +37,8 @@
 struct celula {
     int dado;
     int prioridade;
-    struct no *esquerda;
-    struct no *direita;
+    struct celula *esquerda;
+    struct celula *direita;
 };
 typedef struct celula Celula;
 
