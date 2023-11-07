@@ -150,7 +150,7 @@ Heap *troca_nos(Heap *raiz, Heap *ultimo)
 
 Heap *remover(Heap *raiz) {
     if (raiz == NULL) {
-        printf("A árvore está vazia. Nada a remover.\n");
+        printf("A arvore ja esta vazia.\n");
         return NULL;
     }
 
@@ -187,8 +187,8 @@ Heap *remover(Heap *raiz) {
     }
 
     free(ultimo);
-    return ordena_heap(raiz);
+    raiz = ordena_heap(raiz);
 
     printf("Elemento removido com sucesso!\n");
-
+    return raiz;
 }
