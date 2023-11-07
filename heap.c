@@ -111,7 +111,8 @@ void imprimir(Heap *a)
     }
 }
 
-void inserir(Heap **raiz) {
+void inserir(Heap **raiz) 
+{
     int prioridade, dado;
     
     printf("Digite o dado do elemento: ");
@@ -123,51 +124,71 @@ void inserir(Heap **raiz) {
     printf("Elemento inserido com sucesso!\n");
 }
 
-void remover(Heap **raiz) 
+Heap *encontra_ultimo_elemento(Heap *raiz) 
 {
-    if (*raiz == NULL) 
+    while (raiz->esquerda != NULL || raiz->direita != NULL) 
     {
+        if (raiz->direita != NULL) 
+        {
+            raiz = raiz->direita;
+        } 
+        else 
+        {
+            raiz = raiz->esquerda;
+        }
+    }
+    return raiz;
+}
+
+Heap *troca_nos(Heap *raiz, Heap *ultimo) 
+{
+    Informacoes temp = raiz->info;
+    raiz->info = ultimo->info;
+    ultimo->info = temp;
+    return raiz;
+}
+
+Heap *remover(Heap *raiz) {
+    if (raiz == NULL) {
         printf("A árvore está vazia. Nada a remover.\n");
-        return;
+        return NULL;
     }
 
-    Heap *ultimo = *raiz;
-    Heap *paiAnterior = NULL;
+    Heap *ultimo = encontra_ultimo_elemento(raiz);
 
-    while (ultimo->esquerda != NULL)
+    if (ultimo == raiz) 
     {
-        paiAnterior = ultimo;
-        ultimo = ultimo->esquerda;
+        free(raiz);
+        return NULL;
     }
 
-    if (paiAnterior != NULL)
+    raiz = troca_nos(raiz, ultimo);
+
+    Heap *pai = raiz;
+    while (pai->esquerda != ultimo && pai->direita != ultimo) 
     {
-        paiAnterior->esquerda = ultimo->direita;
+        if (pai->esquerda != NULL) 
+        {
+            pai = pai->esquerda;
+        } 
+        else 
+        {
+            pai = pai->direita;
+        }
+    }
+
+    if (pai->esquerda == ultimo) 
+    {
+        pai->esquerda = NULL;
     } 
-    else
+    else 
     {
-        *raiz = (*raiz)->direita;
+        pai->direita = NULL;
     }
 
     free(ultimo);
+    return ordena_heap(raiz);
+
     printf("Elemento removido com sucesso!\n");
+
 }
-
-
-// int main()
-// {
-//     Heap *a = heap_cria_vazia();
-//     a = fila_prio_inserir(a, 7, 10);
-//     a = fila_prio_inserir(a, 2, 10);
-//     a = fila_prio_inserir(a, 3, 10);
-//     a = fila_prio_inserir(a, 11, 10);
-//     a = fila_prio_inserir(a, 15, 10);
-//     a = fila_prio_inserir(a, 15, 10);
-//     a = fila_prio_inserir(a, 31, 10);
-//     a = fila_prio_inserir(a, 221, 10);
-//     a = fila_prio_inserir(a, 211, 10);
-//     a = fila_prio_inserir(a, 251, 10);
-//     a = fila_prio_inserir(a, 231, 10);
-//     a = fila_prio_inserir(a, 20, 10);
-//     fila_prio_imprime(a);
-// }

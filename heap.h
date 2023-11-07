@@ -30,6 +30,12 @@ void imprimir(Heap *a);
 
 void inserir(Heap **raiz);
 
-void remover(Heap **raiz);
+Heap *encontra_ultimo_elemento(Heap *raiz);
+
+Heap *troca_nos(Heap *raiz, Heap *ultimo);
+
+Heap *remover(Heap *raiz);
+
+
 
 #endif

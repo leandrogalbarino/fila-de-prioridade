@@ -17,7 +17,7 @@ void menu_opcoes(Heap **raiz, int opcao)
             inserir(raiz);
             break;
         case 2:
-            remover(raiz);
+            *raiz = remover(*raiz);
             break;
         case 3:
             imprimir(*raiz);
