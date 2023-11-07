@@ -49,13 +49,13 @@ void menu(Heap *raiz)
             }
         } while (opcao < 1 || opcao > 5);
 
-        if (opcao != 5)
+        if (opcao != 4)
         {
             menu_opcoes(&raiz, opcao);
             espera_enter();
         }
 
-    } while (opcao != 5);
+    } while (opcao != 4);
 }
 
 int main() 

@@ -113,10 +113,11 @@ void imprimir(Heap *a)
 
 void inserir(Heap **raiz) {
     int prioridade, dado;
-    printf("Digite a prioridade do elemento: ");
-    scanf("%d", &prioridade);
+    
     printf("Digite o dado do elemento: ");
     scanf("%d", &dado);
+    printf("Digite a prioridade do elemento: ");
+    scanf("%d", &prioridade);
 
     *raiz = fila_prio_inserir(*raiz, prioridade, dado);
     printf("Elemento inserido com sucesso!\n");
