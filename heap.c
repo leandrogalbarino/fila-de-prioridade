@@ -22,7 +22,10 @@ int quant_de_nos(Heap *raiz)
 {
     int somador = 0;
     if (raiz == NULL)
+    {
         return 0;
+    }
+
     somador++;
     somador += quant_de_nos(raiz->esquerda);
     somador += quant_de_nos(raiz->direita);
@@ -57,51 +60,97 @@ Heap *fila_prio_inserir(Heap *raiz, int prioridade, int dado)
     }
 
     if (raiz->esquerda == NULL)
+    {
         raiz->esquerda = fila_prio_inserir(raiz->esquerda, prioridade, dado);
-
+    }
     else if (raiz->direita == NULL)
+    {
         raiz->direita = fila_prio_inserir(raiz->direita, prioridade, dado);
-
+    }
     else
     {
         if (quant_de_nos(raiz->direita) == quant_de_nos(raiz->esquerda))
+        {
             raiz->esquerda = fila_prio_inserir(raiz->esquerda, prioridade, dado);
-
+        }
         else if (quant_de_nos(raiz->esquerda->esquerda) != quant_de_nos(raiz->esquerda->direita))
+        {
             raiz->esquerda = fila_prio_inserir(raiz->esquerda, prioridade, dado);
-
+        }
         else
+        {
             raiz->direita = fila_prio_inserir(raiz->direita, prioridade, dado);
+        }     
     }
 
     raiz = ordena_heap(raiz);
-
     return raiz;
 }
 
-void fila_prio_imprime(Heap *a)
+void imprimir(Heap *a)
 {
     if (a != NULL)
     {
         printf("No %d:", a->info.prioridade);
         if (a->esquerda != NULL && a->direita != NULL)
-            printf("Filho esq:%d | Filho dir:%d\n", a->esquerda->info.prioridade, a->direita->info.prioridade);
-
+        {
+            printf("Filho esq: %d | Filho dir: %d\n", a->esquerda->info.prioridade, a->direita->info.prioridade);
+        }
         else if (a->direita == NULL && a->esquerda != NULL)
-            printf("Filho esq:%d | Filho dir: NULL\n", a->esquerda->info.prioridade);
+        {
+            printf("Filho esq: %d | Filho dir: NULL\n", a->esquerda->info.prioridade);
+        } 
         else
-            printf("Filho esq:NULL | Filho dir: NULL\n");
+        {
+            printf("Filho esq: NULL | Filho dir: NULL\n");
+        }
+
         printf("\n");
-        fila_prio_imprime(a->esquerda);
-        fila_prio_imprime(a->direita);
+        imprimir(a->esquerda);
+        imprimir(a->direita);
     }
 }
 
+void inserir(Heap **raiz) {
+    int prioridade, dado;
+    printf("Digite a prioridade do elemento: ");
+    scanf("%d", &prioridade);
+    printf("Digite o dado do elemento: ");
+    scanf("%d", &dado);
 
-void fila_prio_libera(Heap *f)
-{
+    *raiz = fila_prio_inserir(*raiz, prioridade, dado);
+    printf("Elemento inserido com sucesso!\n");
 }
 
+void remover(Heap **raiz) 
+{
+    if (*raiz == NULL) 
+    {
+        printf("A árvore está vazia. Nada a remover.\n");
+        return;
+    }
+
+    Heap *ultimo = *raiz;
+    Heap *paiAnterior = NULL;
+
+    while (ultimo->esquerda != NULL)
+    {
+        paiAnterior = ultimo;
+        ultimo = ultimo->esquerda;
+    }
+
+    if (paiAnterior != NULL)
+    {
+        paiAnterior->esquerda = ultimo->direita;
+    } 
+    else
+    {
+        *raiz = (*raiz)->direita;
+    }
+
+    free(ultimo);
+    printf("Elemento removido com sucesso!\n");
+}
 
 
 // int main()

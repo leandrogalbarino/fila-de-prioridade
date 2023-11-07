@@ -26,8 +26,10 @@ Heap *ordena_heap(Heap *raiz);
 
 Heap *fila_prio_inserir(Heap *raiz, int prioridade, int dado);
 
-void fila_prio_imprime(Heap *a);
+void imprimir(Heap *a);
 
-void fila_prio_libera(Heap *f);
+void inserir(Heap **raiz);
+
+void remover(Heap **raiz);
 
 #endif
