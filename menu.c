@@ -19,6 +19,7 @@ void menu_opcoes(Heap **raiz, int opcao)
         break;
     case 2:
         *raiz = remover(*raiz);
+        //printf("Ultimo no: %d", (*raiz)->ultimo_dado);
         break;
     case 3:
         imprimir(*raiz);

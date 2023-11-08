@@ -82,7 +82,6 @@ Heap *fila_prio_inserir(Heap *raiz, int prioridade, int dado)
             raiz->direita = fila_prio_inserir(raiz->direita, prioridade, dado);
         }
     }
-
     raiz = ordena_heap(raiz);
     return raiz;
 }
@@ -122,76 +121,47 @@ Heap *inserir(Heap *raiz)
 
     raiz = fila_prio_inserir(raiz, prioridade, dado);
     printf("Elemento inserido com sucesso!\n");
+    raiz->ultimo_dado = dado;
+    raiz->ultima_prioridade = prioridade;
     return raiz;
 }
 
-Heap *encontra_ultimo_elemento(Heap *raiz)
-{
-    while (raiz->esquerda != NULL || raiz->direita != NULL)
-    {
-        if (raiz->direita != NULL)
-        {
-            raiz = raiz->direita;
-        }
-        else
-        {
-            raiz = raiz->esquerda;
-        }
-    }
-    return raiz;
-}
 
-Heap *troca_nos(Heap *raiz, Heap *ultimo)
-{
-    Informacoes temp = raiz->info;
-    raiz->info = ultimo->info;
-    ultimo->info = temp;
-    return raiz;
-}
-
-Heap *remover(Heap *raiz)
-{
-    if (raiz == NULL)
-    {
-        printf("A arvore ja esta vazia.\n");
+Heap *encontra_ultimo_no(Heap *raiz) {
+    if (raiz == NULL) {
         return NULL;
     }
 
-    Heap *ultimo = encontra_ultimo_elemento(raiz);
+    Heap *ultimo_na_esquerda = encontra_ultimo_no(raiz->esquerda);
+    Heap *ultimo_na_direita = encontra_ultimo_no(raiz->direita);
 
-    if (ultimo == raiz)
-    {
-        free(raiz);
-        return NULL;
+    if (ultimo_na_esquerda == NULL && ultimo_na_direita == NULL) {
+        return raiz;
     }
 
-    raiz = troca_nos(raiz, ultimo);
+    if (ultimo_na_esquerda != NULL) {
+        return ultimo_na_esquerda;
+    } else {
+        return ultimo_na_direita;
+    }
+}
 
-    Heap *pai = raiz;
-    while (pai->esquerda != ultimo && pai->direita != ultimo)
-    {
-        if (pai->esquerda != NULL)
-        {
-            pai = pai->esquerda;
-        }
-        else
-        {
-            pai = pai->direita;
-        }
+
+Heap *troca_nos(Heap *raiz, Heap *ultimo) {
+    Informacoes temp_info = raiz->info; 
+    raiz->info = ultimo->info; 
+    ultimo->info = temp_info; 
+
+    return raiz; 
+}
+
+
+Heap *remover(Heap *raiz) {
+    Heap *ultimo_no = encontra_ultimo_no(raiz);
+
+    if (ultimo_no != NULL) {
+        raiz = troca_nos(raiz, ultimo_no);
     }
 
-    if (pai->esquerda == ultimo)
-    {
-        pai->esquerda = NULL;
-    }
-    else
-    {
-        pai->direita = NULL;
-    }
-
-    free(ultimo);
-    raiz = ordena_heap(raiz);
-
-    printf("Elemento removido com sucesso!\n");
     return raiz;
 }
