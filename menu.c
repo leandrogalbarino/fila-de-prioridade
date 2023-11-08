@@ -2,37 +2,38 @@
 #include <stdlib.h>
 #include "heap.h"
 
-void espera_enter() 
+void espera_enter()
 {
     printf("\nPressione Enter para continuar...");
-    while (getchar() != '\n');
-    getchar(); 
+    while (getchar() != '\n')
+        ;
+    getchar();
 }
 
-void menu_opcoes(Heap **raiz, int opcao) 
+void menu_opcoes(Heap **raiz, int opcao)
 {
-    switch (opcao) 
+    switch (opcao)
     {
-        case 1:
-            inserir(raiz);
-            break;
-        case 2:
-            *raiz = remover(*raiz);
-            break;
-        case 3:
-            imprimir(*raiz);
-            break;
-        case 4:
-            break;
-        default:
-            break;
+    case 1:
+        *raiz = inserir(*raiz);
+        break;
+    case 2:
+        *raiz = remover(*raiz);
+        break;
+    case 3:
+        imprimir(*raiz);
+        break;
+    case 4:
+        break;
+    default:
+        break;
     }
 }
 
-void menu(Heap *raiz) 
+void menu(Heap *raiz)
 {
     int opcao;
-    do 
+    do
     {
         printf("\n\tMENU:\n");
         printf("1. Inserir\n");
@@ -40,25 +41,23 @@ void menu(Heap *raiz)
         printf("3. Imprimir\n");
         printf("4. Sair\n");
 
-        do 
+        do
         {
             printf("DIGITE A OPERACAO QUE DESEJA REALIZAR: ");
             scanf("%d", &opcao);
-            if (opcao < 1 || opcao > 5) {
+            if (opcao < 1 || opcao > 4)
+            {
                 printf("POR FAVOR DIGITE UM NUMERO VALIDO!\n");
             }
-        } while (opcao < 1 || opcao > 5);
+        } while (opcao < 1 || opcao > 4);
 
-        if (opcao != 4)
-        {
-            menu_opcoes(&raiz, opcao);
-            espera_enter();
-        }
+        menu_opcoes(&raiz, opcao);
+        espera_enter();
 
     } while (opcao != 4);
 }
 
-int main() 
+int main()
 {
     Heap *raiz = heap_cria_vazia();
     menu(raiz);

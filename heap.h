@@ -28,7 +28,7 @@ Heap *fila_prio_inserir(Heap *raiz, int prioridade, int dado);
 
 void imprimir(Heap *a);
 
-void inserir(Heap **raiz);
+Heap *inserir(Heap *raiz);
 
 Heap *encontra_ultimo_elemento(Heap *raiz);
 
