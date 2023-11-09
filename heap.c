@@ -126,42 +126,41 @@ Heap *inserir(Heap *raiz)
     return raiz;
 }
 
-
-Heap *encontra_ultimo_no(Heap *raiz) {
+Heap *busca_no(Heap *raiz, int dado, int prioridade){
     if (raiz == NULL) {
         return NULL;
     }
 
-    Heap *ultimo_na_esquerda = encontra_ultimo_no(raiz->esquerda);
-    Heap *ultimo_na_direita = encontra_ultimo_no(raiz->direita);
-
-    if (ultimo_na_esquerda == NULL && ultimo_na_direita == NULL) {
+    if (raiz->info.dado == dado && raiz->info.prioridade == prioridade) {
         return raiz;
     }
 
-    if (ultimo_na_esquerda != NULL) {
-        return ultimo_na_esquerda;
-    } else {
-        return ultimo_na_direita;
+    Heap *no_na_esquerda = busca_no(raiz->esquerda, dado, prioridade);
+    if (no_na_esquerda != NULL) {
+        return no_na_esquerda;
+    }
+
+    Heap *no_na_direita = busca_no(raiz->direita, dado, prioridade);
+    if (no_na_direita != NULL) {
+        return no_na_direita;
     }
 }
-
 
 Heap *troca_nos(Heap *raiz, Heap *ultimo) {
     Informacoes temp_info = raiz->info; 
     raiz->info = ultimo->info; 
     ultimo->info = temp_info; 
-
+    
     return raiz; 
 }
 
 
 Heap *remover(Heap *raiz) {
-    Heap *ultimo_no = encontra_ultimo_no(raiz);
+    Heap *ultimo_no = busca_no(raiz,raiz->ultimo_dado,raiz->ultima_prioridade);
+    printf("ULTIMO NO: %d com prioridade %d", ultimo_no->info.dado, ultimo_no->info.prioridade);
 
     if (ultimo_no != NULL) {
         raiz = troca_nos(raiz, ultimo_no);
     }
-
     return raiz;
 }

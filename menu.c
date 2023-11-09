@@ -12,14 +12,16 @@ void espera_enter()
 
 void menu_opcoes(Heap **raiz, int opcao)
 {
+    Heap *ultimo_no;
     switch (opcao)
     {
     case 1:
         *raiz = inserir(*raiz);
         break;
     case 2:
+        //ultimo_no = busca_no(*raiz,(*raiz)->ultimo_dado,(*raiz)->ultima_prioridade);
+        //printf("ULTIMO NO: %d com prioridade %d", ultimo_no->info.dado, ultimo_no->info.prioridade);
         *raiz = remover(*raiz);
-        //printf("Ultimo no: %d", (*raiz)->ultimo_dado);
         break;
     case 3:
         imprimir(*raiz);
