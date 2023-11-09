@@ -40,5 +40,4 @@ Heap *troca_nos(Heap *raiz, Heap *ultimo_no);
 Heap *remover(Heap *raiz);
 
 
-
 #endif

@@ -90,17 +90,19 @@ void imprimir(Heap *a)
 {
     if (a != NULL)
     {
-        printf("No %d:", a->info.prioridade);
         if (a->esquerda != NULL && a->direita != NULL)
         {
+            printf("No %d:", a->info.prioridade);
             printf("Filho esq: %d | Filho dir: %d\n", a->esquerda->info.prioridade, a->direita->info.prioridade);
         }
         else if (a->direita == NULL && a->esquerda != NULL)
         {
+            printf("No %d:", a->info.prioridade);
             printf("Filho esq: %d | Filho dir: NULL\n", a->esquerda->info.prioridade);
         }
         else
         {
+            printf("No %d:", a->info.prioridade);
             printf("Filho esq: NULL | Filho dir: NULL\n");
         }
 
@@ -149,7 +151,7 @@ Heap *busca_no(Heap *raiz, int dado, int prioridade){
 Heap *troca_nos(Heap *raiz, Heap *ultimo) {
     Informacoes temp_info = raiz->info; 
     raiz->info = ultimo->info; 
-    ultimo->info = temp_info; 
+    ultimo->info = temp_info;
     
     return raiz; 
 }
@@ -158,9 +160,16 @@ Heap *troca_nos(Heap *raiz, Heap *ultimo) {
 Heap *remover(Heap *raiz) {
     Heap *ultimo_no = busca_no(raiz,raiz->ultimo_dado,raiz->ultima_prioridade);
     printf("ULTIMO NO: %d com prioridade %d", ultimo_no->info.dado, ultimo_no->info.prioridade);
+  
 
     if (ultimo_no != NULL) {
+        raiz->ultima_prioridade = ultimo_no->info.prioridade;
+        raiz->ultimo_dado = ultimo_no->info.dado;
+
         raiz = troca_nos(raiz, ultimo_no);
     }
+
+    free(ultimo_no);
+
     return raiz;
 }
