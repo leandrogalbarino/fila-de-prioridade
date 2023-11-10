@@ -32,8 +32,9 @@ void imprimir(Heap *a);
 
 Heap *inserir(Heap *raiz);
 
-//Heap *encontra_ultimo_no(Heap* raiz);
 Heap *busca_no(Heap *raiz, int dado, int prioridade);
+
+Heap *busca_pai(Heap *raiz, int dado, int prioridade);
 
 Heap *troca_nos(Heap *raiz, Heap *ultimo_no);
 
