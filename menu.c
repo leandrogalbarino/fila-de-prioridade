@@ -19,8 +19,6 @@ void menu_opcoes(Heap **raiz, int opcao)
         *raiz = inserir(*raiz);
         break;
     case 2:
-        //ultimo_no = busca_no(*raiz,(*raiz)->ultimo_dado,(*raiz)->ultima_prioridade);
-        //printf("ULTIMO NO: %d com prioridade %d", ultimo_no->info.dado, ultimo_no->info.prioridade);
         *raiz = remover(*raiz);
         break;
     case 3:

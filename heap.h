@@ -11,8 +11,6 @@ typedef struct informacoes Informacoes;
 struct heap
 {
     Informacoes info;
-    // int ultimo_dado;
-    // int ultima_prioridade;
     struct heap *esquerda;
     struct heap *direita;
 };
@@ -31,14 +29,6 @@ Heap *fila_prio_inserir(Heap *raiz, int prioridade, int dado);
 void imprimir(Heap *a);
 
 Heap *inserir(Heap *raiz);
-
-// Heap *busca_no(Heap *raiz, int dado, int prioridade);
-
-// Heap *busca_pai(Heap *raiz, int dado, int prioridade);
-
-// Heap *troca_nos(Heap *raiz, Heap *ultimo_no);
-
-// Heap *remover(Heap *raiz);
 
 Heap *fila_troca(Heap *raiz, Heap *primeiro_no);
 
