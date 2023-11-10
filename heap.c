@@ -86,7 +86,7 @@ Heap *fila_prio_inserir(Heap *raiz, int prioridade, int dado)
     return raiz;
 }
 
-void imprimir(Heap *a)
+void imprimir_arv(Heap *a)
 {
     if (a != NULL)
     {
@@ -107,8 +107,17 @@ void imprimir(Heap *a)
         }
 
         printf("\n");
-        imprimir(a->esquerda);
-        imprimir(a->direita);
+        imprimir_arv(a->esquerda);
+        imprimir_arv(a->direita);
+    }
+}
+
+void imprimir(Heap *a){
+    if(a == NULL){
+        printf("Nao existem elementos na Fila!!\n");
+    }
+    else{
+        imprimir_arv(a);
     }
 }
 
@@ -123,87 +132,173 @@ Heap *inserir(Heap *raiz)
 
     raiz = fila_prio_inserir(raiz, prioridade, dado);
     printf("Elemento inserido com sucesso!\n");
-    raiz->ultimo_dado = dado;
-    raiz->ultima_prioridade = prioridade;
+    // raiz->ultimo_dado = dado;
+    // raiz->ultima_prioridade = prioridade;
     return raiz;
 }
 
-Heap *busca_no(Heap *raiz, int dado, int prioridade){
-    if (raiz == NULL) {
-        return NULL;
-    }
+// Heap *busca_no(Heap *raiz, int dado, int prioridade)
+// {
+//     if (raiz == NULL)
+//     {
+//         return NULL;
+//     }
 
-    if (raiz->info.dado == dado && raiz->info.prioridade == prioridade) {
-        return raiz;
-    }
+//     if (raiz->info.dado == dado && raiz->info.prioridade == prioridade)
+//     {
+//         return raiz;
+//     }
 
-    Heap *no_na_esquerda = busca_no(raiz->esquerda, dado, prioridade);
-    if (no_na_esquerda != NULL) {
-        return no_na_esquerda;
-    }
+//     Heap *no_na_esquerda = busca_no(raiz->esquerda, dado, prioridade);
+//     if (no_na_esquerda != NULL)
+//     {
+//         return no_na_esquerda;
+//     }
 
-    Heap *no_na_direita = busca_no(raiz->direita, dado, prioridade);
-    if (no_na_direita != NULL) {
-        return no_na_direita;
-    }
-}
+//     Heap *no_na_direita = busca_no(raiz->direita, dado, prioridade);
+//     if (no_na_direita != NULL)
+//     {
+//         return no_na_direita;
+//     }
+// }
 
-Heap *busca_pai(Heap *raiz, int dado, int prioridade) {
-    if (raiz == NULL || (raiz->esquerda == NULL && raiz->direita == NULL)) {
-        return NULL;
-    }
+// Heap *busca_pai(Heap *raiz, int dado, int prioridade)
+// {
+//     if (raiz == NULL || (raiz->esquerda == NULL && raiz->direita == NULL))
+//     {
+//         return NULL;
+//     }
 
-    if ((raiz->esquerda != NULL && raiz->esquerda->info.dado == dado && raiz->esquerda->info.prioridade == prioridade) || 
-        (raiz->direita != NULL && raiz->direita->info.dado == dado && raiz->direita->info.prioridade == prioridade)) {
-        return raiz;
-    }
+//     if ((raiz->esquerda != NULL && raiz->esquerda->info.dado == dado && raiz->esquerda->info.prioridade == prioridade) ||
+//         (raiz->direita != NULL && raiz->direita->info.dado == dado && raiz->direita->info.prioridade == prioridade))
+//     {
+//         return raiz;
+//     }
 
-    Heap *pai_na_esquerda = busca_pai(raiz->esquerda, dado, prioridade);
-    if (pai_na_esquerda != NULL) {
-        return pai_na_esquerda;
-    }
+//     Heap *pai_na_esquerda = busca_pai(raiz->esquerda, dado, prioridade);
+//     if (pai_na_esquerda != NULL)
+//     {
+//         return pai_na_esquerda;
+//     }
 
-    Heap *pai_na_direita = busca_pai(raiz->direita, dado, prioridade);
-    if (pai_na_direita != NULL) {
-        return pai_na_direita;
-    }
+//     Heap *pai_na_direita = busca_pai(raiz->direita, dado, prioridade);
+//     if (pai_na_direita != NULL)
+//     {
+//         return pai_na_direita;
+//     }
 
+//     return NULL;
+// }
+
+// Heap *troca_nos(Heap *raiz, Heap *ultimo)
+// {
+//     Heap *pai_ultimo = busca_pai(raiz, raiz->ultimo_dado, raiz->ultima_prioridade);
+//     Informacoes temp_info = raiz->info;
+//     raiz->info = ultimo->info;
+
+//     if (pai_ultimo->direita->info.dado == raiz->ultimo_dado && pai_ultimo->direita->info.prioridade == raiz->ultima_prioridade)
+//     {
+//         pai_ultimo->direita = NULL;
+//     }
+//     else if (pai_ultimo->esquerda->info.dado == raiz->ultimo_dado && pai_ultimo->esquerda->info.prioridade == raiz->ultima_prioridade)
+//     {
+//         pai_ultimo->esquerda = NULL;
+//     }
+
+//     ultimo = NULL;
+
+//     return raiz;
+// }
+
+// Heap *remover(Heap *raiz)
+// {
+//     Heap *ultimo_no = busca_no(raiz, raiz->ultimo_dado, raiz->ultima_prioridade);
+//     printf("ULTIMO NO: %d com prioridade %d", ultimo_no->info.dado, ultimo_no->info.prioridade);
+
+//     if (ultimo_no != NULL)
+//     {
+//         raiz->ultima_prioridade = ultimo_no->info.prioridade;
+//         raiz->ultimo_dado = ultimo_no->info.dado;
+
+//         raiz = troca_nos(raiz, ultimo_no);
+//     }
+
+// raiz = ordena_heap(raiz);
+
+//     return raiz;
+// }
+
+Heap *fila_troca(Heap *raiz, Heap *primeiro_no)
+{
+    primeiro_no->info = raiz->info;
     return NULL;
 }
 
+Heap *fila_prio_remover(Heap *raiz, Heap *primeiro_no)
+{
+    if (raiz == NULL)
+        return NULL;
 
-Heap *troca_nos(Heap *raiz, Heap *ultimo) {
-    Heap* pai_ultimo = busca_pai(raiz,raiz->ultimo_dado,raiz->ultima_prioridade);
-    Informacoes temp_info = raiz->info; 
-    raiz->info = ultimo->info; 
-    
-    if(pai_ultimo->direita->info.dado == raiz->ultimo_dado && pai_ultimo->direita->info.prioridade == raiz->ultima_prioridade){
-        pai_ultimo->direita = NULL;
+    if (raiz->esquerda == NULL)
+    {
+        raiz = fila_troca(raiz, primeiro_no);
     }
-    else if(pai_ultimo->esquerda->info.dado == raiz->ultimo_dado && pai_ultimo->esquerda->info.prioridade == raiz->ultima_prioridade){
-        pai_ultimo->esquerda = NULL;
+    else if (raiz->direita == NULL)
+    {
+        raiz->esquerda = fila_troca(raiz->esquerda, primeiro_no);
     }
-
-    ultimo = NULL;
-
-    return raiz; 
-}
-
-Heap *remover(Heap *raiz) {
-    Heap *ultimo_no = busca_no(raiz,raiz->ultimo_dado,raiz->ultima_prioridade);
-    printf("ULTIMO NO: %d com prioridade %d", ultimo_no->info.dado, ultimo_no->info.prioridade);
-  
-
-    if (ultimo_no != NULL) {
-        raiz->ultima_prioridade = ultimo_no->info.prioridade;
-        raiz->ultimo_dado = ultimo_no->info.dado;
-
-        raiz = troca_nos(raiz, ultimo_no);
+    else
+    {
+        if (quant_de_nos(raiz->direita) == quant_de_nos(raiz->esquerda))
+        {
+            raiz->direita = fila_prio_remover(raiz->direita, primeiro_no);
+        }
+        else if (quant_de_nos(raiz->direita->esquerda) != quant_de_nos(raiz->direita->direita))
+        {
+            raiz->direita = fila_prio_remover(raiz->direita, primeiro_no);
+        }
+        else
+        {
+            raiz->esquerda = fila_prio_remover(raiz->esquerda, primeiro_no);
+        }
     }
-
-    //raiz = ordena_heap(raiz);
 
     return raiz;
 }
 
+Heap *ordenar_toda_heap(Heap *raiz)
+{
+    if (raiz != NULL)
+    {
+        if (raiz->esquerda != NULL && raiz->esquerda->info.prioridade > raiz->info.prioridade)
+        {
+            Informacoes temp = raiz->info;
+            raiz->info = raiz->esquerda->info;
+            raiz->esquerda->info = temp;
+            ordenar_toda_heap(raiz->esquerda);
+        }
 
+        if (raiz->direita != NULL && raiz->direita->info.prioridade > raiz->info.prioridade)
+        {
+            Informacoes temp = raiz->info;
+            raiz->info = raiz->direita->info;
+            raiz->direita->info = temp;
+            ordenar_toda_heap(raiz->direita);
+        }
+    }
+    return raiz;
+}
+
+Heap *remover(Heap *raiz)
+{
+    if (raiz == NULL)
+        printf("Heap vazia, nao foi possivel remover um elemento!!\n");
+    else
+    {
+        raiz = fila_prio_remover(raiz, raiz);
+        ordenar_toda_heap(raiz);
+
+        printf("Elemento removido com sucesso!\n");
+    }
+    return raiz;
+}
