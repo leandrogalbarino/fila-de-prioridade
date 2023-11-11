@@ -24,8 +24,6 @@ void menu_opcoes(Heap **raiz, int opcao)
     case 3:
         imprimir(*raiz);
         break;
-    case 4:
-        break;
     default:
         break;
     }
@@ -37,9 +35,9 @@ void menu(Heap *raiz)
     do
     {
         printf("\n\tMENU:\n");
-        printf("1. Inserir\n");
-        printf("2. Remover\n");
-        printf("3. Imprimir\n");
+        printf("1. Inserir na Heap.\n");
+        printf("2. Remover da Heap.\n");
+        printf("3. Imprimir Heap.\n");
         printf("4. Sair\n");
 
         do

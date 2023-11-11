@@ -85,6 +85,19 @@ Heap *fila_prio_inserir(Heap *raiz, int prioridade, int dado)
     raiz = ordena_heap(raiz);
     return raiz;
 }
+Heap *inserir(Heap *raiz)
+{
+    int prioridade, dado;
+
+    printf("Digite o dado do elemento: ");
+    scanf("%d", &dado);
+    printf("Digite a prioridade do elemento: ");
+    scanf("%d", &prioridade);
+
+    raiz = fila_prio_inserir(raiz, prioridade, dado);
+    printf("Elemento inserido com sucesso!\n");
+    return raiz;
+}
 
 void imprimir_arv(Heap *a)
 {
@@ -112,6 +125,7 @@ void imprimir_arv(Heap *a)
     }
 }
 
+
 void imprimir(Heap *a){
     if(a == NULL){
         printf("Nao existem elementos na Fila!!\n");
@@ -121,19 +135,6 @@ void imprimir(Heap *a){
     }
 }
 
-Heap *inserir(Heap *raiz)
-{
-    int prioridade, dado;
-
-    printf("Digite o dado do elemento: ");
-    scanf("%d", &dado);
-    printf("Digite a prioridade do elemento: ");
-    scanf("%d", &prioridade);
-
-    raiz = fila_prio_inserir(raiz, prioridade, dado);
-    printf("Elemento inserido com sucesso!\n");
-    return raiz;
-}
 
 
 Heap *fila_troca(Heap *raiz, Heap *primeiro_no)
@@ -173,6 +174,7 @@ Heap *fila_prio_remover(Heap *raiz, Heap *primeiro_no)
 
     return raiz;
 }
+
 
 Heap *ordenar_toda_heap(Heap *raiz)
 {
